@@ -1,9 +1,11 @@
 import React from 'react'
+import { PageHeader } from '../components/page-header'
 
 const Home = () => (
-    <div>
-        <h1 className="text-3xl">Hello</h1>
-    </div>
+    <>
+        <PageHeader title="Areeba | FrontEnd Challenge" />
+        <h1>Hello</h1>
+    </>
 )
 
 export default Home
