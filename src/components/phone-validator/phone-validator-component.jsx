@@ -1,5 +1,11 @@
 import React from 'react'
-
+/**
+ * Phone Validator Component
+ * Will return a react functional component
+ * Using tailwind it will detect if the device is small or large
+ * if large it is going to render the component as is {Simple Navbar}
+ * if small it is going to rerender the component rescaled on a small version
+ */
 const PhoneValidatorComponent = () => (
     <div className="bg-white py-16 sm:py-24">
         <div className="relative sm:py-16">
