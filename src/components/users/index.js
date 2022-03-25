@@ -1,2 +1,2 @@
 export { UsersTable } from './users-table'
-export { UserForm } from './add'
+export { UserForm } from './form-handler'
