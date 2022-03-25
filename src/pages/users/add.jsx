@@ -1,9 +1,12 @@
 import React, { useCallback, useState } from 'react'
+import { useRouter } from 'next/router'
 import { PageHeader } from '../../components/page-header'
 import { UserForm } from '../../components'
 import { createUser, validatePhone } from '../../api'
+import { wait } from '../../utils'
 
 const AddUserPage = () => {
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [serverError, setServerError] = useState('')
   const validatePasswordCallback = useCallback(
@@ -31,6 +34,8 @@ const AddUserPage = () => {
           setServerError('Invalid Phone Number')
         } else if (res?.result?.status === 201) {
           callback()
+          await wait(800)
+          router.push('/users')
         } else {
           setServerError(res.data.data.message)
         }
