@@ -23,7 +23,6 @@ const UserForm = ({
       onSubmit={(v, { resetForm }) => {
         v.number = v.number.replace(/\s/g, '')
         v.gender = v.gender === 'Male'
-        console.log(v)
         callback(v, resetForm)
       }}
     >
