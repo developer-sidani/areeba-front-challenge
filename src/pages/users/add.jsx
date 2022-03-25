@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageHeader } from '../../components/page-header'
-import { AddUserForm } from '../../components'
+import { UserForm } from '../../components'
 
 const AddUserPage = () => (
        <>
@@ -58,7 +58,7 @@ const AddUserPage = () => (
                        </p>
                    </div>
                    <div className="mt-12">
-                       <AddUserForm />
+                       <UserForm />
                    </div>
                </div>
            </div>

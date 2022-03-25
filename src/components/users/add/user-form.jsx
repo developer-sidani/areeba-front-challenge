@@ -4,7 +4,7 @@ import {
 } from 'formik'
 import { initialValues, addUserSchema } from './formik-handlers'
 
-const AddUserForm = () => (
+const UserForm = ({ user, callback, deleteUserCallback }) => (
     <Formik
       initialValues={initialValues}
       validationSchema={addUserSchema}
@@ -16,7 +16,7 @@ const AddUserForm = () => (
         {({
           errors, handleSubmit, touched, handleChange, values,
         }) => (
-            <form
+            <Form
               onSubmit={e => {
                 e.preventDefault()
                 handleSubmit()
@@ -25,7 +25,7 @@ const AddUserForm = () => (
             >
                 <div>
                     <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                        First name
+                        First name*
                     </label>
                     <div className="mt-1">
                         <Field
@@ -40,7 +40,7 @@ const AddUserForm = () => (
                 </div>
                 <div>
                     <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                        Last name
+                        Last name*
                     </label>
                     <div className="mt-1">
                         <Field
@@ -55,7 +55,7 @@ const AddUserForm = () => (
                 </div>
                 <div className="sm:col-span-2">
                     <label htmlFor="number" className="block text-sm font-medium text-gray-700">
-                        Phone Number
+                        Phone Number*
                     </label>
                     <div className="mt-1">
                         <Field
@@ -70,7 +70,7 @@ const AddUserForm = () => (
                 </div>
                 <div className="sm:col-span-2">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                        Email
+                        Email*
                     </label>
                     <div className="mt-1">
                         <Field
@@ -85,7 +85,7 @@ const AddUserForm = () => (
                 </div>
                 <div className="sm:col-span-2">
                     <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">
-                        Birthday
+                        Birthday*
                     </label>
                     <div className="mt-1">
                         <Field
@@ -109,6 +109,7 @@ const AddUserForm = () => (
                                   type="radio"
                                   name="gender"
                                   value={x}
+                                  id={x}
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                 />
                                 <label htmlFor={x} className="ml-3 block text-sm font-medium text-gray-700">
@@ -126,9 +127,9 @@ const AddUserForm = () => (
                         Create User
                     </button>
                 </div>
-            </form>
+            </Form>
         )}
     </Formik>
 )
 
-export default AddUserForm
+export default UserForm

@@ -1,2 +1,2 @@
 export { UsersTable } from './users-table'
-export { AddUserForm } from './add'
+export { UserForm } from './add'

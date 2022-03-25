@@ -1,3 +1,3 @@
-import AddUserForm from './add-user-form'
+import UserForm from './user-form'
 
-export { AddUserForm }
+export { UserForm }
