@@ -5,7 +5,12 @@ import React, {
   memo,
 } from 'react'
 import { useRouter } from 'next/router'
-import { deleteUser, getUser } from '../../../api'
+import {
+  deleteUser,
+  getUser,
+  updateUser,
+  validatePhone,
+} from '../../../api'
 import { PageHeader } from '../../../components/page-header'
 import { UserForm, DeleteUserModal } from '../../../components'
 import { wait } from '../../../utils'
@@ -29,9 +34,47 @@ const EditUserPage = () => {
   const [user, setUser] = useState()
   const [open, setOpen] = useState(false)
   const [userLoading, setUserLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [serverError, setServerError] = useState('')
+  const validatePasswordCallback = useCallback(
+    async (number) => {
+      try {
+        const res = await validatePhone(number)
+        return res?.res
+      } catch (err) {
+        console.log({ err })
+      }
+    },
+    [],
+  )
+  const updateUserCallback = useCallback(async (data, callback) => {
+    setLoading(true)
+    setServerError('')
+    await validatePasswordCallback(data.number).then(async (response) => {
+      data.phone = response
+      console.log({ data })
+      try {
+        const res = await updateUser(user._id, user)
+        console.log({ res })
+        if (res.status === 422) {
+          setServerError('Invalid Phone Number')
+        } else if (res?.result?.status === 201) {
+          callback()
+          await wait(800)
+          router.push('/users')
+        } else {
+          setServerError(res.data.data.message)
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setLoading(false)
+      }
+    })
+  }, [router, user])
   const deleteUserCallback = useCallback(async userId => {
     try {
-      const res = await deleteUser(userId)
+      await deleteUser(userId)
       await wait(500)
       router.push('/users')
     } catch (e) {
@@ -123,7 +166,10 @@ const EditUserPage = () => {
                  <div className="mt-12">
                      <UserForm
                        user={user}
+                       loading={loading}
+                       serverError={serverError}
                        deleteUserCallback={() => setOpen(true)}
+                       callback={updateUserCallback}
                      />
                  </div>
              </div>

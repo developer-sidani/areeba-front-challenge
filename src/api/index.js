@@ -8,4 +8,5 @@ export {
   createUser,
   getUser,
   deleteUser,
+  updateUser,
 } from './user'
