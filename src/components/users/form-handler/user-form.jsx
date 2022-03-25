@@ -15,7 +15,7 @@ const UserForm = ({
         lastName: user?.lastName || '',
         number: user?.phone?.international_format || '',
         email: user?.email || '',
-        gender: Object.keys(user || {}) > 0 ? user?.gender ? 'Male' : 'Female' : 'Male',
+        gender: user ? user?.gender === true ? 'Male' : 'Female' : 'Male',
         birthdate: user?.birthdate || '',
       }}
       enableReinitialize
@@ -190,7 +190,7 @@ const UserForm = ({
                             </div>
                         )
                     }
-                    {!user && (
+                    {!deleteUserCallback && (
                         <button
                           type="submit"
                           disabled={loading}
