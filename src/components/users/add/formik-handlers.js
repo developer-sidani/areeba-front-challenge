@@ -1,13 +1,5 @@
 import * as Yup from 'yup'
 
-export const initialValues = {
-  firstName: '',
-  lastName: '',
-  number: '',
-  email: '',
-  gender: 'Male',
-  birthdate: '',
-}
 export const addUserSchema = Yup.object().shape({
   firstName: Yup.string().required('Required'),
   lastName: Yup.string().required('Required'),

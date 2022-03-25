@@ -2,22 +2,31 @@ import React from 'react'
 import {
   Formik, Form, Field,
 } from 'formik'
-import { initialValues, addUserSchema } from './formik-handlers'
+import { addUserSchema } from './formik-handlers'
 
 const UserForm = ({
-  user, callback, deleteUserCallback, serverErrors,
+  user, callback, deleteUserCallback, serverError = 'Email Was found',
 }) => (
     <Formik
-      initialValues={initialValues}
+      initialValues={{
+        firstName: user?.firstName || '',
+        lastName: user?.lastName || '',
+        number: user?.number || '',
+        email: user?.email || '',
+        gender: user ? user?.gender ? 'Male' : 'Female' : 'Male',
+        birthdate: user?.birthdate || '',
+      }}
+      enableReinitialize
       validationSchema={addUserSchema}
       onSubmit={(v) => {
         v.number = v.number.replace(/\s/g, '')
         v.gender = v.gender === 'Male'
         console.log(v)
+        callback(v)
       }}
     >
         {({
-          errors, handleSubmit, touched, handleChange, values,
+          errors, handleSubmit, touched,
         }) => (
             <Form
               onSubmit={e => {
