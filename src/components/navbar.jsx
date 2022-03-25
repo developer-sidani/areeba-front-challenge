@@ -26,7 +26,7 @@ const Navbar = () => {
   const router = useRouter()
   const reroute = useMemo(() => ({
     phone: () => router.push('/'),
-    customers: () => router.push('/customers'),
+    users: () => router.push('/users'),
   }), [router])
   return (
       <Popover className="relative bg-white">
@@ -59,9 +59,9 @@ const Navbar = () => {
               <button
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
                 type="button"
-                onClick={reroute.customers}
+                onClick={reroute.users}
               >
-                Customers
+                Users
               </button>
             </Popover.Group>
           </div>
@@ -105,11 +105,11 @@ const Navbar = () => {
                     Phone Validation
                   </button>
                   <button
-                    onClick={reroute.customers}
+                    onClick={reroute.users}
                     type="button"
                     className="mt-2 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700"
                   >
-                    Customers
+                    Users
                   </button>
                 </div>
               </div>
