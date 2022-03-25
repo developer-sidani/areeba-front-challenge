@@ -2,7 +2,7 @@ import React from 'react'
 import { XCircleIcon } from '@heroicons/react/solid'
 
 const ErrorMessageContainer = ({ message }) => (
-    <div className="w-full rounded-md bg-red-50 p-4">
+    <div className="w-full rounded-md bg-red-50 p-4 mb-3">
         <div className="flex">
             <div className="flex-shrink-0">
                 <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
