@@ -13,7 +13,7 @@ const UserForm = ({
       initialValues={{
         firstName: user?.firstName || '',
         lastName: user?.lastName || '',
-        number: user?.number || '',
+        number: user?.phone?.international_format || '',
         email: user?.email || '',
         gender: Object.keys(user || {}) > 0 ? user?.gender ? 'Male' : 'Female' : 'Male',
         birthdate: user?.birthdate || '',
