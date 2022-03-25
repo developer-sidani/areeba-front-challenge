@@ -15,16 +15,16 @@ const UserForm = ({
         lastName: user?.lastName || '',
         number: user?.number || '',
         email: user?.email || '',
-        gender: user ? user?.gender ? 'Male' : 'Female' : 'Male',
+        gender: Object.keys(user || {}) > 0 ? user?.gender ? 'Male' : 'Female' : 'Male',
         birthdate: user?.birthdate || '',
       }}
       enableReinitialize
       validationSchema={addUserSchema}
-      onSubmit={(v) => {
+      onSubmit={(v, { resetForm }) => {
         v.number = v.number.replace(/\s/g, '')
         v.gender = v.gender === 'Male'
         console.log(v)
-        callback(v)
+        callback(v, resetForm)
       }}
     >
         {({
@@ -164,16 +164,45 @@ const UserForm = ({
                           message={serverError}
                         />
                     )}
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className={
-                        loading ? 'animate-pulse w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400'
-                          : 'w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                      }
-                    >
-                        {user ? 'Update User' : 'Create User'}
-                    </button>
+                    {
+                        (user || deleteUserCallback) && (
+                            <div className="grid gap-4 grid-cols-2 grid-rows-1 xs:grid-cols-1 xs:grid-rows-2">
+                                <button
+                                  type="button"
+                                  onClick={deleteUserCallback}
+                                  disabled={loading}
+                                  className={
+                                        loading ? 'animate-pulse w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400'
+                                          : 'w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
+                                    }
+                                >
+                                    Delete
+                                </button>
+                                <button
+                                  type="submit"
+                                  disabled={loading}
+                                  className={
+                                        loading ? 'animate-pulse w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400'
+                                          : 'w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                    }
+                                >
+                                    Update
+                                </button>
+                            </div>
+                        )
+                    }
+                    {!user && (
+                        <button
+                          type="submit"
+                          disabled={loading}
+                          className={
+                                loading ? 'animate-pulse w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400'
+                                  : 'w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                            }
+                        >
+                            Create User
+                        </button>
+                    )}
                 </div>
             </Form>
         )}
