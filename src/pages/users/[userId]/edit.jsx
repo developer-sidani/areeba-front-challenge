@@ -32,11 +32,8 @@ const EditUserPage = () => {
   const deleteUserCallback = useCallback(async userId => {
     try {
       const res = await deleteUser(userId)
-      console.log(res)
-      if (res.status === 200) {
-        await wait(500)
-        router.push('/users')
-      }
+      await wait(500)
+      router.push('/users')
     } catch (e) {
       console.log(e)
     }

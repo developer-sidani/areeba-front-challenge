@@ -9,12 +9,11 @@ const UsersPage = () => {
   const [users, setUsers] = useState()
   const [loading, setLoading] = useState(false)
   const getAllUsers = useCallback(
-    async (callback) => {
+    async () => {
       setLoading(true)
       try {
         const res = await getUsers()
         setUsers(res?.data)
-        callback()
       } catch (err) {
         console.log({ err })
       } finally {
@@ -25,7 +24,7 @@ const UsersPage = () => {
   )
   useEffect(() => {
     getAllUsers()
-  }, [])
+  }, [getAllUsers])
   return (
       <>
         <PageHeader title="Areeba Challenge | Users" />
