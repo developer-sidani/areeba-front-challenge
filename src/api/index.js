@@ -3,4 +3,4 @@ export {
   beBaseUrl,
 } from './config'
 export { validatePhone } from './phone'
-export { getUsers, createUser } from './user'
+export { getUsers, createUser, getUser } from './user'
