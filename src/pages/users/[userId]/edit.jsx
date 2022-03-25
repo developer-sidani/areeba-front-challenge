@@ -5,9 +5,10 @@ import React, {
   memo,
 } from 'react'
 import { useRouter } from 'next/router'
-import { getUser } from '../../../api'
+import { deleteUser, getUser } from '../../../api'
 import { PageHeader } from '../../../components/page-header'
 import { UserForm, DeleteUserModal } from '../../../components'
+import { wait } from '../../../utils'
 
 const Loader = memo(() => {
   const circleCommonClasses = 'h-5 w-5 bg-red-400 rounded-full'
@@ -28,6 +29,18 @@ const EditUserPage = () => {
   const [user, setUser] = useState()
   const [open, setOpen] = useState(false)
   const [userLoading, setUserLoading] = useState(false)
+  const deleteUserCallback = useCallback(async userId => {
+    try {
+      const res = await deleteUser(userId)
+      console.log(res)
+      if (res.status === 200) {
+        await wait(500)
+        router.push('/users')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
   const getUserCallback = useCallback(
     async (user) => {
       setUserLoading(true)
@@ -42,7 +55,7 @@ const EditUserPage = () => {
         }
       }
     },
-    [],
+    [router],
   )
 
   useEffect(() => {
@@ -53,7 +66,12 @@ const EditUserPage = () => {
      <PageHeader title={`Areeba Challenge | ${user?.firstName || ''} ${user?.lastName || ''} `} />
      {userLoading ? (<Loader />) : (
          <div className="bg-white py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
-             <DeleteUserModal open={open} setOpen={setOpen} user={user} />
+             <DeleteUserModal
+               open={open}
+               setOpen={setOpen}
+               user={user}
+               callback={() => deleteUserCallback(userId)}
+             />
              <div className="relative max-w-xl mx-auto">
                  <svg
                    className="absolute left-full transform translate-x-1/2"
