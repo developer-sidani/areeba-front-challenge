@@ -50,6 +50,7 @@ const UsersPage = () => {
               <UsersTable
                 users={users}
                 loading={loading}
+                router={router}
               />
           </div>
       </>

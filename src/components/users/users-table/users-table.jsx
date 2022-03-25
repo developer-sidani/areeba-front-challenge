@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UsersTable = ({ users, loading }) => (
+const UsersTable = ({ users, loading, router }) => (
         <div className="mt-8 flex flex-col">
             <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -49,9 +49,13 @@ const UsersTable = ({ users, loading }) => (
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{user?.birthdate}</td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{user?.gender ? 'Male' : 'Female'}</td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                                        <button
+                                          type="button"
+                                          className="text-indigo-600 hover:text-indigo-900"
+                                          onClick={() => router.push(`/users/${user?._id}/edit`)}
+                                        >
                                             Edit
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             ))}

@@ -4,7 +4,9 @@ import {
 } from 'formik'
 import { initialValues, addUserSchema } from './formik-handlers'
 
-const UserForm = ({ user, callback, deleteUserCallback }) => (
+const UserForm = ({
+  user, callback, deleteUserCallback, serverErrors,
+}) => (
     <Formik
       initialValues={initialValues}
       validationSchema={addUserSchema}
@@ -36,6 +38,11 @@ const UserForm = ({ user, callback, deleteUserCallback }) => (
                           placeholder="Ahmad"
                           className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                         />
+                        {errors.firstName && touched.firstName ? (
+                            <div className="mt-2 text-pink-600 text-sm">
+                                {errors.firstName}
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <div>
@@ -51,6 +58,11 @@ const UserForm = ({ user, callback, deleteUserCallback }) => (
                           placeholder="Sidani"
                           className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                         />
+                        {errors.lastName && touched.lastName ? (
+                            <div className="mt-2 text-pink-600 text-sm">
+                                {errors.lastName}
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <div className="sm:col-span-2">
@@ -66,6 +78,11 @@ const UserForm = ({ user, callback, deleteUserCallback }) => (
                           placeholder="+961 76 940 820"
                           className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                         />
+                        {errors.number && touched.number ? (
+                            <div className="mt-2 text-pink-600 text-sm">
+                                {errors.number}
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <div className="sm:col-span-2">
@@ -81,6 +98,11 @@ const UserForm = ({ user, callback, deleteUserCallback }) => (
                           placeholder="developer.sidani@gmail.com"
                           className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                         />
+                        {errors.email && touched.email ? (
+                            <div className="mt-2 text-pink-600 text-sm">
+                                {errors.email}
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <div className="sm:col-span-2">
@@ -96,6 +118,11 @@ const UserForm = ({ user, callback, deleteUserCallback }) => (
                           className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                           placeholder="2001-02-14"
                         />
+                        {errors.birthdate && touched.birthdate ? (
+                            <div className="mt-2 text-pink-600 text-sm">
+                                {errors.birthdate}
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <div className="sm:col-span-2">
