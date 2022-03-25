@@ -11,6 +11,7 @@ const UserForm = ({
       initialValues={initialValues}
       validationSchema={addUserSchema}
       onSubmit={(v) => {
+        v.number = v.number.replace(/\s/g, '')
         v.gender = v.gender === 'Male'
         console.log(v)
       }}
