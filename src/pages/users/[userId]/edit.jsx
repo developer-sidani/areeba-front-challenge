@@ -7,8 +7,7 @@ import React, {
 import { useRouter } from 'next/router'
 import { getUser } from '../../../api'
 import { PageHeader } from '../../../components/page-header'
-import { UserForm } from '../../../components'
-import DeleteUserModal from '../../../components/users/delete-user-modal'
+import { UserForm, DeleteUserModal } from '../../../components'
 
 const Loader = memo(() => {
   const circleCommonClasses = 'h-5 w-5 bg-red-400 rounded-full'
