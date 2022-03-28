@@ -12,7 +12,7 @@ import {
   validatePhone,
 } from '../../../api'
 import { PageHeader } from '../../../components/page-header'
-import { UserForm, DeleteUserModal } from '../../../components'
+import { UserForm, DeleteUserModal, UserUpdatedModal } from '../../../components'
 import { wait } from '../../../utils'
 
 const Loader = memo(() => {
@@ -33,6 +33,7 @@ const EditUserPage = () => {
   const { userId } = router.query
   const [user, setUser] = useState()
   const [open, setOpen] = useState(false)
+  const [openUserUpdatedModal, setOpenUserUpdatedModal] = useState(false)
   const [userLoading, setUserLoading] = useState(false)
   const [loading, setLoading] = useState(false)
   const [serverError, setServerError] = useState('')
@@ -59,8 +60,8 @@ const EditUserPage = () => {
           setServerError('Invalid Phone Number')
         } else if (res?.result?.status === 200) {
           callback()
-          await wait(800)
-          router.push('/users')
+          await wait(500)
+          setOpenUserUpdatedModal(true)
         } else {
           setServerError(res.data?.data?.message)
         }
@@ -105,6 +106,14 @@ const EditUserPage = () => {
      <PageHeader title={`Areeba Challenge | ${user?.firstName || ''} ${user?.lastName || ''} `} />
      {userLoading ? (<Loader />) : (
          <div className="bg-white py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
+           <UserUpdatedModal
+             open={openUserUpdatedModal}
+             user={user}
+             callback={async () => {
+               await wait(500)
+               router.reload()
+             }}
+           />
              <DeleteUserModal
                open={open}
                setOpen={setOpen}

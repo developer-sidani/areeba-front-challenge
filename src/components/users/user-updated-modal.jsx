@@ -3,10 +3,10 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/outline'
 
 const UserUpdatedModal = ({
-  open, setOpen, user, callback,
+  open, user, callback,
 }) => (
     <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={setOpen}>
+        <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={() => {}}>
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <Transition.Child
                   as={Fragment}
@@ -43,7 +43,7 @@ const UserUpdatedModal = ({
                                 </Dialog.Title>
                                 <div className="mt-2">
                                     <p className="text-sm text-gray-500">
-                                        {`${user?.firstName} ${user?.lastName} was updated successfully!`}
+                                        {`Data for ${user?.firstName} ${user?.lastName} were updated successfully!`}
                                     </p>
                                 </div>
                             </div>
