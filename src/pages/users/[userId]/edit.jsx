@@ -52,9 +52,8 @@ const EditUserPage = () => {
     setServerError('')
     await validatePasswordCallback(data.number).then(async (response) => {
       data.phone = response
-      console.log({ data })
       try {
-        const res = await updateUser(user._id, user)
+        const res = await updateUser(user._id, data)
         console.log({ res })
         if (res.status === 422) {
           setServerError('Invalid Phone Number')

@@ -27,7 +27,7 @@ const UserForm = ({
       }}
     >
         {({
-          errors, handleSubmit, touched,
+          errors, handleSubmit, touched, dirty,
         }) => (
             <Form
               onSubmit={e => {
@@ -179,10 +179,11 @@ const UserForm = ({
                                 </button>
                                 <button
                                   type="submit"
-                                  disabled={loading}
+                                  disabled={loading || !dirty}
                                   className={
                                         loading ? 'animate-pulse w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400'
-                                          : 'w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                          : !dirty ? 'w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-400'
+                                            : 'w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                     }
                                 >
                                     Update
