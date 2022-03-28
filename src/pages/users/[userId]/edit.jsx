@@ -58,12 +58,12 @@ const EditUserPage = () => {
         console.log({ res })
         if (res.status === 422) {
           setServerError('Invalid Phone Number')
-        } else if (res?.result?.status === 201) {
+        } else if (res?.result?.status === 200) {
           callback()
           await wait(800)
           router.push('/users')
         } else {
-          setServerError(res.data.data.message)
+          setServerError(res.data?.data?.message)
         }
       } catch (e) {
         console.log(e)

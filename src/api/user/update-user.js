@@ -26,6 +26,6 @@ export const updateUser = async (userId, {
       result,
     }
   } catch (err) {
-    return err.response
+    return err
   }
 }
